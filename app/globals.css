@@ -61,3 +61,72 @@
 @media(max-width:800px){.roof-v2-journey{height:540vh}.roof-v2-sticky{padding:28px 17px 12px;min-height:0}.roof-v2-overline{font-size:.5rem}.roof-v2-overline>span:last-child{display:none}.roof-v2-main{display:grid;grid-template-columns:63% 37%;grid-template-rows:auto minmax(0,1fr);gap:0;align-items:center}.roof-v2-heading{grid-column:1/-1;grid-row:1;padding:18px 0 0;pointer-events:auto}.roof-v2-heading h2{font-size:clamp(3.1rem,9vw,5rem)}.roof-v2-heading p{max-width:400px;font-size:.75rem;margin-top:12px}.roof-v2-section-number{margin-bottom:6px}.roof-v2-art{grid-column:1;grid-row:2;width:155%;transform:translateX(-19%);align-self:center}.roof-v2-labels{grid-column:2;grid-row:2;gap:1px;margin-left:-4px;padding:0}.roof-v2-item{min-height:67px;padding:4px 0 5px 5px;border-left:0}.roof-v2-item:before{display:none}.roof-v2-select{gap:6px}.roof-v2-dot{height:21px;width:21px;font-size:.8rem}.roof-v2-copy small{font-size:.52rem}.roof-v2-copy strong{font-size:.96rem}.roof-v2-copy em{font-size:.57rem}.roof-v2-discover{padding-left:28px;font-size:.53rem}.roof-v2-overview img{width:56px;height:56px}.roof-v2-overview>span{font-size:.85rem}.roof-v2-counter{font-size:1.25rem;min-width:65px}.roof-v2-counter small{font-size:.85rem}.roof-v2-stepper button{width:30px;height:30px}}
 @media(max-width:440px){.roof-v2-sticky{padding:16px 12px 10px}.roof-v2-heading h2{font-size:2.85rem}.roof-v2-heading p{font-size:.72rem}.roof-v2-main{grid-template-columns:61% 39%}.roof-v2-art{width:166%;transform:translateX(-20%)}.roof-v2-item{min-height:60px}.roof-v2-copy strong{font-size:.88rem}.roof-v2-copy em{font-size:.53rem}.roof-v2-discover{display:none}.roof-v2-overview img{width:45px;height:45px}.roof-v2-overview>span{font-size:.75rem}.roof-v2-bottom{padding-bottom:8px}}
 @media(prefers-reduced-motion:reduce){.roof-v2-journey{height:auto!important}.roof-v2-sticky{position:relative;height:auto;min-height:850px}.roof-v2-photo{opacity:1!important}.roof-v2-slice{display:none}}
+
+
+/* Roof V3: real individual WebGL meshes. Mobile typography never overlays the canvas. */
+.roof-v3-journey{height:615svh;isolation:isolate}
+.roof-v3-sticky{min-height:0;height:100svh;padding:103px clamp(18px,3.7vw,70px) 17px;background:radial-gradient(ellipse at 47% 45%,#29302a 0%,#171e1a 57%,#111715 100%)}
+.roof-v3-overline{position:relative;z-index:1}
+.roof-v3-main{grid-template-columns:minmax(210px,25%) minmax(0,53%) minmax(190px,22%);gap:0;overflow:visible}
+.roof-v3-heading{z-index:3;align-self:start;padding-top:clamp(32px,6vh,80px)}
+.roof-v3-heading h2{font-size:clamp(3rem,4.6vw,6.1rem);white-space:normal}
+.roof-v3-heading p{max-width:290px}
+.roof-v3-art{height:100%;max-height:70svh;width:120%;transform:translateX(-10%);align-self:center;min-height:0;position:relative;overflow:visible}
+.roof-3d-host{height:100%;min-height:0;width:100%;position:relative;overflow:hidden}
+.roof-3d-canvas{width:100%;height:100%;display:block;outline:none}
+.roof-3d-hint{position:absolute;bottom:10%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.51rem;letter-spacing:.16em;color:#b3aa97;pointer-events:none;opacity:.8}
+.roof-3d-fallback{width:100%;height:100%;object-fit:contain}
+.roof-3d-loading{height:100%;display:grid;place-items:center;color:#a9b4a9;font-size:.72rem;letter-spacing:.13em}
+.roof-v3-labels{position:relative;z-index:5;align-self:center;margin-left:0;max-height:100%;overflow:visible}
+.roof-v3-item{min-height:66px;padding:6px 0 5px 16px}
+.roof-v3-item:before{left:-17px;width:16px;top:31px}
+.roof-v3-bottom{min-height:62px;align-items:center}
+.roof-v3-bottom .roof-v2-overview img{width:65px;height:65px}
+.roof-v3-bottom .roof-v2-overview>span{font-size:.88rem}
+@media(max-width:1060px){
+ .roof-v3-main{grid-template-columns:27% 48% 25%}
+ .roof-v3-heading h2{font-size:clamp(2.65rem,4.8vw,4.8rem)}
+ .roof-v3-art{width:126%;transform:translateX(-13%)}
+ .roof-v3-item{min-height:57px}
+}
+@media(max-width:760px){
+ .roof-v3-journey{height:555svh}
+ .roof-v3-sticky{height:100svh;min-height:0;padding:79px 12px max(9px,env(safe-area-inset-bottom));}
+ .roof-v3-overline{font-size:.47rem;letter-spacing:.12em}
+ .roof-v3-main{display:grid;grid-template-columns:minmax(0,65%) minmax(0,35%);grid-template-rows:auto minmax(0,1fr);flex:1;min-height:0}
+ .roof-v3-heading{grid-column:1/-1;grid-row:1;padding:5px 0 5px;pointer-events:auto}
+ .roof-v3-heading .roof-v2-section-number{font-size:1rem;margin-bottom:2px}
+ .roof-v3-heading h2{font-size:clamp(2.15rem,8.3vw,3.7rem);line-height:1.01}
+ .roof-v3-heading p{margin-top:6px;max-width:380px;font-size:.69rem;line-height:1.35}
+ .roof-v3-art{grid-column:1;grid-row:2;width:106%;height:100%;max-height:none;min-height:0;margin:0;transform:translateX(-4%);align-self:stretch}
+ .roof-3d-hint{font-size:.35rem;bottom:6%;letter-spacing:.05em}
+ .roof-v3-labels{grid-column:2;grid-row:2;align-self:center;display:flex;flex-direction:column;justify-content:center;gap:2px;margin:0;padding:0 0 0 2px;max-height:100%;min-width:0}
+ .roof-v3-item{min-height:48px;padding:4px 0 2px 0;border:0}
+ .roof-v3-item:before{display:none}
+ .roof-v3-item .roof-v2-select{gap:5px;min-width:0}
+ .roof-v3-item .roof-v2-dot{width:20px;height:20px;flex-shrink:0}
+ .roof-v3-item .roof-v2-copy strong{font-size:clamp(.73rem,2.4vw,.95rem);line-height:1.04;overflow-wrap:anywhere}
+ .roof-v3-item .roof-v2-copy small{font-size:.48rem}
+ .roof-v3-item .roof-v2-copy em{display:none}
+ .roof-v3-item .roof-v2-discover{display:none}
+ .roof-v3-bottom{min-height:48px;margin-top:2px;padding:0 0 6px}
+ .roof-v3-bottom .roof-v2-overview img{width:40px;height:40px}
+ .roof-v3-bottom .roof-v2-overview{gap:8px}
+ .roof-v3-bottom .roof-v2-overview>span{font-size:.76rem}
+ .roof-v3-bottom .roof-v2-counter{min-width:60px;font-size:1.15rem}
+ .roof-v3-bottom .roof-v2-stepper button{width:28px;height:28px}
+ .roof-v3-bottom .roof-v2-stepper{gap:6px}
+}
+@media(max-width:375px){
+ .roof-v3-sticky{padding-left:8px;padding-right:8px}
+ .roof-v3-main{grid-template-columns:minmax(0,62%) minmax(0,38%)}
+ .roof-v3-heading h2{font-size:2.15rem}
+ .roof-v3-item{min-height:43px}
+ .roof-v3-item .roof-v2-copy strong{font-size:.71rem}
+ .roof-v3-bottom .roof-v2-overview>span{font-size:.68rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .roof-v3-journey{height:auto}
+ .roof-v3-sticky{position:relative;height:auto;min-height:710px}
+ .roof-3d-canvas{animation:none;transition:none}
+}
