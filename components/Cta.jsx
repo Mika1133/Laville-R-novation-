@@ -1,0 +1,1 @@
+import Link from "next/link";export default function Cta({title="Un projet de toiture ?",description="Parlons-en."}){return <section className="cta"><p>LE SAVOIR-FAIRE À VOTRE SERVICE</p><h2>{title}<br/><em>{description}</em></h2><Link href="/demande-de-devis" className="button rust">Demander un devis <span>↗</span></Link></section>}

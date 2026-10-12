@@ -1,9 +1,16 @@
 # Laville Rénovation
+Site Next.js indépendant — direction photographique et éditoriale approuvée.
 
-Site vitrine premium — couverture, rénovation et étanchéité à Bordeaux.
+## Pages
+Accueil, prestations détaillées, réalisations, entreprise, zones d'intervention, contact et devis.
 
-Direction artistique validée : ivoire, charbon, terre cuite, photographie architecturale et toiture décomposable au défilement.
+## Toiture interactive
+Composant `components/Roof.jsx` : six séquences au défilement, chacune avec sa couche, son étiquette, son texte et son lien. Séparation et réassemblage réversibles au scroll ; adaptation mobile et prefers-reduced-motion.
 
-Projet en cours de reconstruction. Les photographies de démonstration seront remplacées par les chantiers du client.
+## Développement
+`npm install && npm run dev`
 
-Aucune donnée personnelle ni clé privée ne doit être versionnée.
+## Important
+Toutes les photos du prototype sont illustratives. Elles doivent être remplacées par les photos validées en définition originale et les vrais chantiers du couvreur. Aucune fausse coordonnée ni promesse d'urgence 24/7.
+
+Backend Supabase à raccorder après création du projet spécifique. Le formulaire de démonstration n'envoie actuellement aucune donnée.
