@@ -1,0 +1,1 @@
+Roof approved assets mapped to original PNGs. These 8 files are byte-for-byte copies of existing Git blobs; no regeneration. Layer animation uses photos separately and reference states assembled/exploded. The source images do not share one 3D camera; transitions will be visually approximate, not a physically exact roof geometry.
