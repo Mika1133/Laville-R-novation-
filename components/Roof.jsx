@@ -1,32 +1,92 @@
 'use client';
-import {useEffect,useRef,useState} from "react";import Link from "next/link";
-const parts=[
-{title:"Couverture",subtitle:"Tuiles et rénovation",desc:"La couche visible protège le bâtiment des intempéries.",url:"/prestations/renovation-toiture"},
-{title:"Liteaux",subtitle:"Supports de couverture",desc:"Les liteaux fixés à la charpente soutiennent les tuiles.",url:"/prestations/renovation-toiture"},
-{title:"Écran de sous-toiture",subtitle:"Protection complémentaire",desc:"Une protection supplémentaire adaptée à la configuration de la toiture.",url:"/prestations/etancheite"},
-{title:"Isolation",subtitle:"Confort et efficacité",desc:"Une couche pédagogique : cette intervention reste à confirmer avec l’entreprise.",url:"/prestations"},
-{title:"Charpente",subtitle:"Structure porteuse",desc:"La structure soutient l’ensemble ; cette intervention reste à confirmer.",url:"/prestations"},
-{title:"Zinguerie",subtitle:"Gouttières et raccords",desc:"Les finitions protègent les points de jonction et évacuent l’eau.",url:"/prestations/zinguerie-gouttieres"}
+import {useEffect,useRef,useState} from "react";
+import Link from "next/link";
+
+const layers=[
+  {title:"Couverture",subtitle:"Tuiles et rénovation",desc:"La première protection face aux intempéries.",href:"/prestations/renovation-toiture",poly:"polygon(0% 37%,25% 29%,53% 18%,82% 1%,93% 13%,94% 25%,77% 34%,46% 49%,0% 60%)",dx:-2,dy:-12},
+  {title:"Liteaux",subtitle:"Fixation de la couverture",desc:"Les pièces de bois sur lesquelles la couverture est fixée.",href:"/prestations/renovation-toiture",poly:"polygon(16% 47%,68% 20%,92% 12%,97% 24%,94% 34%,67% 49%,22% 61%,10% 57%)",dx:1,dy:-7},
+  {title:"Écran de sous-toiture",subtitle:"Protection complémentaire",desc:"Une barrière supplémentaire qui contribue à protéger la toiture.",href:"/prestations/etancheite",poly:"polygon(9% 55%,64% 30%,96% 27%,97% 47%,59% 66%,14% 68%)",dx:2,dy:-1},
+  {title:"Isolation",subtitle:"Confort thermique",desc:"Couche visible à titre pédagogique, prestation à confirmer.",href:"/prestations",poly:"polygon(16% 70%,60% 50%,94% 45%,96% 68%,57% 85%,20% 83%)",dx:2,dy:5},
+  {title:"Charpente",subtitle:"Structure porteuse",desc:"L’ossature soutient l’ensemble de la toiture.",href:"/prestations",poly:"polygon(16% 73%,60% 51%,98% 54%,100% 90%,67% 99%,30% 96%)",dx:3,dy:12},
+  {title:"Zinguerie & évacuation",subtitle:"Gouttières et raccords",desc:"Les éléments qui recueillent et évacuent l’eau de pluie.",href:"/prestations/zinguerie-gouttieres",poly:"polygon(0% 44%,20% 47%,41% 61%,59% 74%,67% 92%,57% 99%,40% 91%,0% 76%)",dx:-3,dy:11}
 ];
-const clamp=x=>Math.min(1,Math.max(0,x));
-export default function Roof(){const root=useRef(null),[p,setP]=useState(0),[reduced,setReduced]=useState(false),[override,setOverride]=useState(null);
-useEffect(()=>{const m=window.matchMedia("(prefers-reduced-motion: reduce)");const change=()=>setReduced(m.matches);change();m.addEventListener("change",change);
-let raf=0;const measure=()=>{if(raf)return;raf=requestAnimationFrame(()=>{raf=0;if(!root.current)return;const r=root.current.getBoundingClientRect(), travel=Math.max(1,r.height-window.innerHeight);setP(v=>{const n=clamp(-r.top/travel);return Math.abs(v-n)<.0005?v:n})})};measure();window.addEventListener("scroll",measure,{passive:true});window.addEventListener("resize",measure);return()=>{window.removeEventListener("scroll",measure);window.removeEventListener("resize",measure);m.removeEventListener("change",change);cancelAnimationFrame(raf)}},[]);
-const step=Math.min(5,Math.floor(p*6)),active=override===null?step:override,t=reduced?1:p;
-const shift=(a,b,d)=>d*clamp((t-a)/(b-a)),offs=[-shift(.02,.23,178),-shift(.18,.42,100),-shift(.33,.56,26),shift(.48,.72,67),shift(.61,.82,135)];
-const select=i=>{setOverride(i);if(root.current&&!reduced){const start=window.scrollY+root.current.getBoundingClientRect().top,range=root.current.offsetHeight-window.innerHeight;window.scrollTo({top:start+range*((i+.4)/6),behavior:"smooth"});window.setTimeout(()=>setOverride(null),900)}};
-return <section className="roof-journey" ref={root} id="au-coeur-de-votre-toiture" aria-label="Exploration interactive d’une toiture"><div className="roof-stuck">
-<div className="roof-top"><span>02. — ANATOMIE D’UNE TOITURE</span><span>SCROLLEZ POUR EXPLORER ↓</span></div>
-<div className="roof-layout"><div className="roof-story"><small>UN TOIT, PLUSIEURS SAVOIR-FAIRE</small><h2>Au cœur<br/>de votre <em>toiture.</em></h2><p>Découvrez les différentes couches de votre toiture et leurs rôles.</p><div className="roof-current"><span>0{active+1} / 06</span><h3>{parts[active].title}</h3><p>{parts[active].desc}</p><Link href={parts[active].url}>Découvrir ce savoir-faire ↗</Link></div></div>
-<div className="roof-stage"><svg viewBox="0 0 860 680" role="img" aria-label="Vue en éclaté d’une toiture : couverture, liteaux, écran sous-toiture, isolation et charpente. Chaque couche se sépare au défilement.">
-<defs><linearGradient id="tile"><stop stopColor="#f0b184"/><stop offset=".5" stopColor="#bf704c"/><stop offset="1" stopColor="#713b30"/></linearGradient><linearGradient id="wood"><stop stopColor="#d3a479"/><stop offset="1" stopColor="#7b573c"/></linearGradient><linearGradient id="under"><stop stopColor="#b7bcb1"/><stop offset="1" stopColor="#52625c"/></linearGradient><linearGradient id="wool"><stop stopColor="#e9dbb7"/><stop offset="1" stopColor="#a99772"/></linearGradient><filter id="drop"><feDropShadow dx="0" dy="15" stdDeviation="11" floodOpacity=".45"/></filter><pattern id="curves" width="35" height="30" patternUnits="userSpaceOnUse" patternTransform="skewY(12)"><path d="M0 0V25Q8 33 17 25Q26 33 35 25V0" fill="none" stroke="#753c30" strokeWidth="3.5" opacity=".7"/><path d="M4 3Q15 9 17 23M22 3Q32 10 33 23" fill="none" stroke="#ffc392" strokeWidth="2" opacity=".5"/></pattern></defs>
-<ellipse cx="418" cy="618" rx="340" ry="38" fill="#050807" opacity=".3"/>
-<g className="roof-piece" style={{transform:"translateY("+offs[4]+"px)"}} filter="url(#drop)"><polygon points="107,389 460,230 769,382 411,563" fill="#4c3b2d" stroke="#d6b48b" strokeWidth="5"/>{Array.from({length:8},(_,i)=><path key={i} d={"M"+(125+i*42)+" "+(387-i*17)+"L"+(408+i*45)+" "+(558-i*22)} fill="none" stroke="url(#wood)" strokeWidth="15"/>)}<path d="M111 406L410 579L768 398" fill="none" stroke="#b58964" strokeWidth="13"/></g>
-<g className="roof-piece" style={{transform:"translateY("+offs[3]+"px)"}} filter="url(#drop)"><polygon points="107,378 460,220 769,371 411,551" fill="url(#wool)" stroke="#f4e4be" strokeWidth="4"/><polygon points="107,378 411,551 411,574 107,403" fill="#b39b75"/><polygon points="411,551 769,371 769,396 411,574" fill="#847354"/>{Array.from({length:6},(_,i)=><path key={i} d={"M"+(138+i*46)+" "+(381-i*17)+"L"+(415+i*47)+" "+(548-i*22)} stroke="#f9e8c1" strokeWidth="3" opacity=".33"/>)}</g>
-<g className="roof-piece" style={{transform:"translateY("+offs[2]+"px)"}} filter="url(#drop)"><polygon points="107,366 460,209 769,360 411,539" fill="url(#under)" stroke="#c6cdc4" strokeWidth="3"/><polygon points="107,366 411,539 411,553 107,380" fill="#53605b"/><polygon points="411,539 769,360 769,374 411,553" fill="#46554f"/>{Array.from({length:6},(_,i)=><path key={i} d={"M"+(153+i*46)+" "+(360-i*17)+"L"+(419+i*46)+" "+(533-i*21)} stroke="#d1d5cb" strokeWidth="2" strokeDasharray="7 12" opacity=".46"/>)}</g>
-<g className="roof-piece" style={{transform:"translateY("+offs[1]+"px)"}} filter="url(#drop)"><polygon points="107,356 460,199 769,351 411,528" fill="#382f26" stroke="#93765b" strokeWidth="3"/>{Array.from({length:10},(_,i)=><path key={"l"+i} d={"M"+(118+i*30)+" "+(351-i*12)+"L"+(406+i*37)+" "+(524-i*16)} stroke="url(#wood)" strokeWidth="12"/>)}{Array.from({length:6},(_,i)=><path key={"c"+i} d={"M"+(120+i*56)+" "+(351+i*33)+"L"+(469+i*58)+" "+(198+i*29)} stroke="#cba17b" strokeWidth="11"/>)}</g>
-<g className="roof-piece" style={{transform:"translateY("+offs[0]+"px)"}} filter="url(#drop)"><polygon points="107,344 460,187 769,339 411,516" fill="url(#tile)" stroke="#d9a17a" strokeWidth="4"/><polygon points="107,344 411,516 411,538 107,364" fill="#814838"/><polygon points="411,516 769,339 769,359 411,538" fill="#703c32"/><polygon points="107,344 460,187 769,339 411,516" fill="url(#curves)" opacity=".9"/>{Array.from({length:10},(_,i)=><path key={i} d={"M"+(113+i*31)+" "+(341-i*12)+"L"+(413+i*35)+" "+(515-i*16)} stroke="#723b2f" strokeWidth="3" opacity=".5"/>)}<path d="M107 345L460 187L769 340" stroke="#f9c498" strokeWidth="4" fill="none"/></g>
-<path d="M408 558L766 384" stroke="#c4c9c5" strokeWidth="8" opacity=".7"/>
-</svg><div className="roof-caption"><span>VUE AXONOMÉTRIQUE DE LA TOITURE</span><span>0{active+1} / 06</span></div></div>
-<div className="roof-labels" aria-label="Couches de la toiture">{parts.map((l,i)=><button key={l.title} className={i===active?"roof-label active":"roof-label"} type="button" aria-current={i===active?"step":undefined} onClick={()=>select(i)}><span className="roof-plus">{i===active?"−":"+"}</span><span><strong>{l.title}</strong><small>{l.subtitle}</small></span><span className="roof-num">0{i+1}</span></button>)}</div></div>
-<div className="roof-foot"><span>COMPRENDRE CHAQUE COUCHE</span><div className="roof-bar"><div style={{width:(p*100)+"%"}}/></div><span>SCROLL ↓</span></div></div></section>}
+const clamp=(v,min=0,max=1)=>Math.max(min,Math.min(max,v));
+const ease=v=>{const x=clamp(v);return x*x*(3-2*x)};
+const photo="/images/toiture-explosee.webp";
+export default function Roof(){
+ const root=useRef(null);
+ const [progress,setProgress]=useState(0);
+ const [reduced,setReduced]=useState(false);
+ useEffect(()=>{
+   const media=window.matchMedia("(prefers-reduced-motion: reduce)");
+   const onMedia=()=>setReduced(media.matches);
+   onMedia();media.addEventListener("change",onMedia);
+   let frame=0;
+   const measure=()=>{
+     if(frame)return;
+     frame=window.requestAnimationFrame(()=>{
+       frame=0;
+       if(!root.current)return;
+       const rect=root.current.getBoundingClientRect();
+       const travel=Math.max(1,rect.height-window.innerHeight);
+       const next=clamp(-rect.top/travel);
+       setProgress(previous=>Math.abs(previous-next)<.0006?previous:next);
+     });
+   };
+   measure();
+   window.addEventListener("scroll",measure,{passive:true});
+   window.addEventListener("resize",measure);
+   return()=>{window.removeEventListener("scroll",measure);window.removeEventListener("resize",measure);media.removeEventListener("change",onMedia);window.cancelAnimationFrame(frame)};
+ },[]);
+ const active=Math.min(5,Math.floor(progress*6));
+ const explosion=reduced?0:ease((progress-.03)/.83);
+ const select=(index)=>{
+   if(!root.current)return;
+   const top=window.scrollY+root.current.getBoundingClientRect().top;
+   const max=root.current.offsetHeight-window.innerHeight;
+   window.scrollTo({top:top+max*((index+.4)/6),behavior:reduced?"instant":"smooth"});
+ };
+ return <section className="roof-v2-journey" id="au-coeur-de-votre-toiture" ref={root} aria-label="Anatomie interactive d'une toiture">
+  <div className="roof-v2-sticky">
+   <div className="roof-v2-overline"><span>02. — NOTRE SAVOIR-FAIRE</span><span>SCROLL POUR EXPLORER <span aria-hidden="true">↓</span></span></div>
+   <div className="roof-v2-main">
+    <div className="roof-v2-heading">
+      <span className="roof-v2-section-number">02.</span>
+      <h2>Au cœur<br/>de votre <em>toiture.</em></h2>
+      <p>Découvrez les différentes couches de votre toiture et nos zones d’intervention.</p>
+    </div>
+    <div className="roof-v2-art" aria-label="Toiture en perspective, couches qui se séparent pendant le défilement" role="img">
+      <div className="roof-v2-rim"/>
+      <div className="roof-v2-photo" style={{backgroundImage:`url("${photo}")`,opacity:reduced?1:1-ease((progress-.04)/.16)}}/>
+      {!reduced&&layers.map((layer,i)=>{
+        const a=ease((progress-(.035+i*.095))/.27);
+        return <div className="roof-v2-slice" key={layer.title} aria-hidden="true"
+          style={{backgroundImage:`url("${photo}")`,clipPath:layer.poly,
+           transform:`translate3d(${layer.dx*a}%,${layer.dy*a}%,0)`,opacity:ease((progress-.015)/.14)}}/>;
+      })}
+      <div className="roof-v2-shadow" aria-hidden="true"/>
+    </div>
+    <div className="roof-v2-labels" aria-label="Les différentes couches">
+      {layers.map((layer,i)=><div className={i===active?"roof-v2-item is-active":"roof-v2-item"} key={layer.title}>
+       <button type="button" onClick={()=>select(i)} className="roof-v2-select" aria-current={i===active?"step":undefined} aria-label={"Afficher : "+layer.title}>
+        <span className="roof-v2-dot">{i===active?"−":"+"}</span><span className="roof-v2-copy"><small>0{i+1}</small><strong>{layer.title}</strong><em>{layer.subtitle}</em></span>
+       </button>
+       <Link href={layer.href} className="roof-v2-discover">En savoir plus ↗</Link>
+      </div>)}
+    </div>
+   </div>
+   <div className="roof-v2-bottom">
+    <button type="button" className="roof-v2-overview" onClick={()=>select(0)} aria-label="Revenir à la vue complète de la toiture">
+      <img alt="" src="/images/vue-complete.webp" width="95" height="95"/>
+      <span>Vue complète <span>↗</span></span>
+    </button>
+    <div className="roof-v2-stepper">
+      <span className="roof-v2-counter">0{active+1} <small>/ 06</small></span>
+      <button type="button" onClick={()=>select(Math.max(0,active-1))} disabled={active===0} aria-label="Couche précédente">←</button>
+      <button type="button" onClick={()=>select(Math.min(5,active+1))} disabled={active===5} aria-label="Couche suivante">→</button>
+    </div>
+   </div>
+   <div className="roof-v2-progress" aria-hidden="true"><span style={{width:(progress*100)+"%"}}/></div>
+  </div>
+ </section>;
+}
