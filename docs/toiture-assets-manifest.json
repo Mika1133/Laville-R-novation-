@@ -1,0 +1,29 @@
+{
+  "version": "validated-roof-assets-v1",
+  "source": "Images spécifiquement validées dans la conversation du 12 octobre 2026",
+  "assetRoot": "/images/toiture",
+  "files": {
+    "couverture": "/images/toiture/couverture.webp",
+    "liteaux": "/images/toiture/liteaux.webp",
+    "sous-toiture": "/images/toiture/sous-toiture.webp",
+    "isolation": "/images/toiture/isolation.webp",
+    "charpente": "/images/toiture/charpente.webp",
+    "zinguerie": "/images/toiture/zinguerie.webp",
+    "vue-assemblee": "/images/toiture/vue-assemblee.webp",
+    "vue-eclatee": "/images/toiture/vue-eclatee.webp"
+  },
+  "displayOrder": [
+    "couverture",
+    "liteaux",
+    "sous-toiture",
+    "isolation",
+    "charpente",
+    "zinguerie"
+  ],
+  "states": {
+    "assembled": "vue-assemblee",
+    "exploded": "vue-eclatee"
+  },
+  "note": "Ces images proviennent de générations indépendantes et ne sont PAS parfaitement alignées en perspective. Ne pas les empiler sans recadrage/validation ou modèle 3D commun.",
+  "status": "Assets to upload; prototype not deployed"
+}
