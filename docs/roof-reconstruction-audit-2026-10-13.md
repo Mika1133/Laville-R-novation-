@@ -60,7 +60,7 @@ Les huit chemins existent réellement sur la branche auditée :
 - `vue-assemblee.png` — `8ec233f89f15cb8fd448eb7ca7a1a2bd2fbb5194`
 - `vue-eclatee.png` — `44a23edb82bf2d84553607f438ca461cad07de3b`
 
-**Examen visuel effectivement réalisé :** `zinguerie.png` (gouttière/raccord en zinc photoréalistes, détourés). Les sept autres sont vérifiés quant à leur présence, leurs empreintes et leur provenance, **mais pas encore inspectés pixel par pixel** : le connecteur renvoie un contenu vide pour les PNG de plus de 1 Mo. Il ne faut pas déclarer l'audit graphique complet avant d'obtenir ces sept PNG via pièce jointe ou un accès binaire adapté.
+**Examen visuel mis à jour (13/10/2026) :** l'utilisateur a fourni les huit références sous forme d'images attachées (plusieurs conversions JPEG et un PNG). Leurs contenus visuels ont maintenant tous été examinés. L'analyse comparative et les spécifications métier/3D figurent dans [`roof-visual-reference-and-3d-production-spec-2026-10-13.md`](./roof-visual-reference-and-3d-production-spec-2026-10-13.md). Les PNG d'origine présents sur GitHub sont conservés et inchangés. Les visuels ne remplacent pas un master 3D.
 
 Les originaux **ne sont ni écrasés ni remplacés**.
 
@@ -84,8 +84,8 @@ Les originaux **ne sont ni écrasés ni remplacés**.
 - Build Next.js réussi et déploiement READY sont des **contrôles techniques**, non une validation visuelle.
 
 ## 6. État de cette intervention
-**Réalisé :** lecture des composants, CSS, route de test, packages, docs et PR #1 ; traçabilité Git des huit PNG ; observation réelle de la gouttière `zinguerie.png` ; inspection du statut de déploiement Vercel existant.
+**Réalisé :** lecture des composants, CSS, route de test, packages, docs et PR #1 ; traçabilité Git des huit PNG ; **inspection visuelle des huit références fournies** ; diagnostic de leurs incompatibilités géométriques ; rédaction du cahier de production 3D ; inspection du statut de déploiement Vercel existant.
 
-**Non réalisé :** inspection visuelle complète des sept autres PNG, reconstruction/modélisation 3D, nouveaux rendus, nouvelle animation, captures écran de l'implémentation, tests appareils, build/QA de la nouvelle version.
+**Non réalisé :** reconstruction/modélisation 3D, nouveaux rendus, nouvelle animation, captures écran de l'implémentation, tests appareils, build/QA de la nouvelle version.
 
-**Blocage de production :** source 3D commune absente + inspection graphique de sept PNG indisponible via l'accès binaire présent. Obtenir les références comme fichiers consultables et produire/valider un master 3D fidèle **avant de lancer le développement**. Aucune branche `main` ni donnée Supabase modifiée.
+**Blocage de production restant :** source 3D commune absente, et Blender non disponible dans l'environnement d'exécution actuel. **L'accès aux références visuelles n'est plus bloquant.** Il reste à produire et faire valider un master 3D fidèle **avant le développement de l'animation**. Aucune branche `main` ni donnée Supabase modifiée.
