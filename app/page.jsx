@@ -6,13 +6,13 @@ import styles from "./home.module.css";
 
 // Existing service and project illustrations are preserved.
 // The roof exploded artwork is the original approved PNG in public/images/toiture.
-const heroImage = "https://images.unsplash.com/photo-1655751583650-83e331f71749?auto=format&fit=crop&w=2000&q=85";
+const heroImage = "https://images.unsplash.com/photo-1576703190985-b4a7bfa1f1ae?auto=format&fit=crop&w=2000&q=85";
 
 export default function Home() {
   return (
     <>
       <section className={styles.hero} aria-labelledby="home-hero-title">
-        <div className={styles.heroPhoto} style={{ backgroundImage: 'url("' + heroImage + '")' }} role="img" aria-label="Bordeaux au soleil couchant" />
+        <div className={styles.heroPhoto} style={{ backgroundImage: 'url("' + heroImage + '")' }} role="img" aria-label="Architecture bordelaise photographiée à la lumière dorée" />
         <div className={styles.heroShade} />
         <div className={styles.heroInner}>
           <p className={styles.heroEyebrow}>ARTISAN COUVREUR · BORDEAUX & ALENTOURS</p>
