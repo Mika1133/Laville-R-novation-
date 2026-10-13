@@ -1,9 +1,115 @@
-import Link from "next/link";import Roof from "../components/Roof";import Cta from "../components/Cta";import {SERVICES,PROJECTS,PHOTO_NOTE} from "../lib/data";
-const hero="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1800&q=85";
-export default function Home(){return <><section className="hero" style={{backgroundImage:"linear-gradient(90deg,rgba(12,19,17,.7),rgba(12,19,17,.06)),url("+hero+")"}}><div className="hero-inner"><span className="overline">COUVERTURE · RÉNOVATION · BORDEAUX</span><h1>Le<br/>savoir-faire<br/><em>au sommet.</em></h1><p>Couverture, rénovation et étanchéité<br/>à Bordeaux et ses alentours.</p><div className="hero-buttons"><Link className="button cream" href="/demande-de-devis">Demander un devis <span>↗</span></Link><Link className="button outline-white" href="/prestations/urgence-toiture">Urgence toiture <span>↗</span></Link></div></div><div className="hero-scroll"><span>DES TOITURES QUI TRAVERSENT LE TEMPS</span><a href="#expertises">DÉCOUVRIR ↓</a></div></section>
-<section id="expertises" className="expertises wrapper"><div className="section-heading"><span>01.</span><h2>Nos expertises</h2><Link href="/prestations">Voir toutes les prestations ↗</Link></div><div className="expertise-grid">{SERVICES.map(s=><Link href={"/prestations/"+s.slug} className="expertise" key={s.slug}><div className="expertise-img" style={{backgroundImage:"url("+s.image+")"}}/><div className="expertise-caption"><span>{s.title}</span><span>↗</span></div></Link>)}</div></section>
-<section className="statement"><div className="statement-photo" style={{backgroundImage:"url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=85)"}}/><div className="statement-copy"><span className="overline dark">LE GESTE ET LA MATIÈRE</span><h2>Des toitures<br/>qui traversent<br/><em>le temps.</em></h2><p>Protéger, rénover et valoriser votre patrimoine, avec une attention particulière portée à chaque détail.</p><Link href="/entreprise">Découvrir notre approche ↗</Link></div></section>
-<Roof/>
-<section className="projects wrapper"><div className="section-heading"><span>03.</span><h2>Réalisations récentes</h2><Link href="/realisations">Toutes les réalisations ↗</Link></div><div className="project-grid">{PROJECTS.slice(0,3).map(p=><Link href="/realisations" key={p.slug} className="project"><div className="project-image" style={{backgroundImage:"url("+p.image+")"}}/><small>{p.category} · {p.city}</small><h3>{p.name}</h3></Link>)}</div><p className="caption-note">{PHOTO_NOTE}</p></section>
-<section className="territory wrapper"><div><span className="overline dark">04. — ZONE D’INTERVENTION</span><h2>Notre territoire,<br/><em>Bordeaux et ses alentours.</em></h2><p>Un savoir-faire local, au plus près de vos projets.</p><Link className="text-link" href="/zones-intervention">Découvrir les communes desservies ↗</Link></div><div className="map"><div className="map-ring one"/><div className="map-ring two"/><div className="map-ring three"/><strong>Bordeaux</strong><span>Le Bouscat · Cenon · Pessac · Talence</span></div></section>
-<Cta title="Une question ?" description="Parlons de votre projet."/></>}
+import Link from "next/link";
+import Roof from "../components/Roof";
+import Cta from "../components/Cta";
+import { SERVICES, PROJECTS, PHOTO_NOTE } from "../lib/data";
+import styles from "./home.module.css";
+
+// Existing service and project illustrations are preserved.
+// The roof exploded artwork is the original approved PNG in public/images/toiture.
+const heroImage = "https://images.unsplash.com/photo-1655751583650-83e331f71749?auto=format&fit=crop&w=2000&q=85";
+
+export default function Home() {
+  return (
+    <>
+      <section className={styles.hero} aria-labelledby="home-hero-title">
+        <div className={styles.heroPhoto} style={{ backgroundImage: 'url("' + heroImage + '")' }} role="img" aria-label="Bordeaux au soleil couchant" />
+        <div className={styles.heroShade} />
+        <div className={styles.heroInner}>
+          <p className={styles.heroEyebrow}>ARTISAN COUVREUR · BORDEAUX & ALENTOURS</p>
+          <h1 id="home-hero-title">Le<br />savoir-faire<br /><em>au sommet.</em></h1>
+          <p className={styles.heroSub}>Couverture, rénovation et étanchéité à Bordeaux et dans les communes voisines.</p>
+          <div className={styles.heroActions}>
+            <Link href="/demande-de-devis" className={styles.lightButton}>Demander un devis <span aria-hidden="true">↗</span></Link>
+            <Link href="/prestations/urgence-toiture" className={styles.outlineButton}>Urgence toiture <span aria-hidden="true">↗</span></Link>
+          </div>
+        </div>
+        <div className={styles.heroBottom}>
+          <span>DES TOITURES QUI TRAVERSENT LE TEMPS</span>
+          <a href="#expertises">DÉCOUVRIR NOS EXPERTISES <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section className={styles.expertise} id="expertises" aria-labelledby="home-expertise-title">
+        <div className={styles.shell}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionIndex}>01.</span>
+            <div>
+              <p className={styles.miniLabel}>LE CHAMP DE NOS INTERVENTIONS</p>
+              <h2 id="home-expertise-title">Nos expertises.</h2>
+            </div>
+            <Link href="/prestations" className={styles.headerLink}>Toutes les prestations <span aria-hidden="true">↗</span></Link>
+          </div>
+          <div className={styles.serviceGrid}>
+            {SERVICES.map((service, index) => (
+              <Link href={"/prestations/" + service.slug} key={service.slug} className={styles.serviceCard}>
+                <span className={styles.servicePhoto} style={{ backgroundImage: 'url("' + service.image + '")' }} aria-hidden="true" />
+                <span className={styles.serviceLine}>
+                  <span className={styles.serviceNumber}>{"0" + (index + 1)}</span>
+                  <strong>{service.title}</strong>
+                  <span className={styles.serviceArrow} aria-hidden="true">↗</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className={styles.serviceNote}>Chaque toiture est différente. Nous adaptons les interventions à l’état de l’existant.</p>
+        </div>
+      </section>
+
+      <Roof />
+
+      <section className={styles.craft} aria-labelledby="craft-heading">
+        <div className={styles.craftPhoto} role="img" aria-label="Architecture et détails de toiture" />
+        <div className={styles.craftCopy}>
+          <span className={styles.craftEyebrow}>LE GESTE & LA MATIÈRE</span>
+          <h2 id="craft-heading">Des toitures<br />qui traversent<br /><em>le temps.</em></h2>
+          <p>Un chantier réussi se reconnaît dans le soin apporté aux détails. De l’étude des besoins aux finitions, nous recherchons la solution adaptée à chaque habitation.</p>
+          <Link href="/entreprise" className={styles.darkLink}>Découvrir notre approche <span aria-hidden="true">↗</span></Link>
+        </div>
+      </section>
+
+      <section className={styles.projects} aria-labelledby="projects-heading">
+        <div className={styles.shell}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionIndex}>03.</span>
+            <div>
+              <p className={styles.miniLabel}>L’ATTENTION PORTÉE AUX DÉTAILS</p>
+              <h2 id="projects-heading">Réalisations récentes.</h2>
+            </div>
+            <Link href="/realisations" className={styles.headerLink}>Voir la galerie <span aria-hidden="true">↗</span></Link>
+          </div>
+          <div className={styles.projectGrid}>
+            {PROJECTS.slice(0, 3).map((project, i) => (
+              <Link href="/realisations" className={styles.projectCard} key={project.slug}>
+                <div className={styles.projectPhoto} style={{ backgroundImage: 'url("' + project.image + '")' }} aria-hidden="true">
+                  <span>{"0" + (i + 1)}</span>
+                </div>
+                <span className={styles.projectMeta}>{project.category} · {project.city}</span>
+                <span className={styles.projectBottom}><strong>{project.name}</strong><span aria-hidden="true">↗</span></span>
+              </Link>
+            ))}
+          </div>
+          <p className={styles.photoNote}>{PHOTO_NOTE}</p>
+        </div>
+      </section>
+
+      <section className={styles.territory} aria-labelledby="territory-heading">
+        <div className={styles.shell + " " + styles.territoryGrid}>
+          <div className={styles.territoryCopy}>
+            <p className={styles.miniLabel}>04. — PROXIMITÉ</p>
+            <h2 id="territory-heading">Nos racines,<br /><em>Bordeaux et ses alentours.</em></h2>
+            <p>Basés dans la métropole bordelaise, nous intervenons auprès des particuliers pour leurs projets de couverture et de rénovation.</p>
+            <Link href="/zones-intervention" className={styles.darkLink}>Nos zones d’intervention <span aria-hidden="true">↗</span></Link>
+          </div>
+          <div className={styles.territoryPanel} aria-label="Exemples de communes desservies autour de Bordeaux">
+            <span className={styles.panelTop}>GIRONDE · NOUVELLE-AQUITAINE</span>
+            <strong>Bordeaux<span>.</span></strong>
+            <p>Mérignac · Pessac · Talence · Cenon<br />Le Bouscat et alentours</p>
+            <div className={styles.panelBottom}><span>ANCRAGE LOCAL</span><span>↗ 33</span></div>
+          </div>
+        </div>
+      </section>
+
+      <Cta title="Une question ?" description="Parlons de votre projet." />
+    </>
+  );
+}
